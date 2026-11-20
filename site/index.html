@@ -1,0 +1,235 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI Skills That Work</title>
+<meta name="description" content="Free, tested skills for Claude. Each one comes with a demo you can watch before you install it.">
+<meta property="og:title" content="AI Skills That Work">
+<meta property="og:description" content="Free, tested skills for Claude. Each one comes with a demo you can watch before you install it.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="https://i.ytimg.com/vi/CgK8EIVBRBY/hqdefault.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c1c45'/%3E%3Cpath d='M16 6l9 18H7z' fill='none' stroke='%23ffbe5c' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M16 15l4.5 9h-9z' fill='%23ffbe5c'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
+<style>
+  :root {
+    --navy: #1c1c45;
+    --deep: #0e0e2c;
+    --blue: #0046ff;
+    --amber: #ffbe5c;
+    --paper: #f6f6f8;
+    --ink: #00002e;
+    --soft: #4c4c66;
+    --line: #d9dde8;
+    --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
+    --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
+    --gutter: clamp(16px, 5vw, 72px);
+    --measure: 62ch;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body { margin: 0; background: var(--paper); color: var(--ink); font-family: var(--body); font-size: 18px; line-height: 1.55; -webkit-font-smoothing: antialiased; }
+  a { color: inherit; }
+  :focus-visible { outline: 3px solid var(--amber); outline-offset: 3px; border-radius: 4px; }
+  h1, h2, h3 { font-family: var(--display); margin: 0; letter-spacing: -0.02em; }
+  p { margin: 0; }
+
+  /* ---- Hero: the fractal is the one loud thing on the page ---- */
+  .hero { position: relative; background: var(--deep); color: #fff; min-height: min(92vh, 860px); display: flex; flex-direction: column; overflow: hidden; }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,14,44,.94) 0%, rgba(14,14,44,.78) 38%, rgba(14,14,44,.12) 72%, rgba(14,14,44,0) 100%), linear-gradient(0deg, rgba(14,14,44,.7) 0%, rgba(14,14,44,0) 40%); pointer-events: none; }
+  .bar { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px var(--gutter); }
+  .mark { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
+  .mark svg { flex-shrink: 0; }
+  .bar a.gh { font-size: 16px; font-weight: 500; text-decoration: none; padding: 8px 14px; border: 1px solid rgba(255,255,255,.4); border-radius: 999px; white-space: nowrap; }
+  .bar a.gh:hover { background: #fff; color: var(--deep); }
+  .pitch { position: relative; z-index: 2; margin-top: auto; padding: 48px var(--gutter) clamp(48px, 9vh, 96px); max-width: 980px; }
+  .pitch h1 { font-weight: 800; font-size: clamp(52px, 10.5vw, 148px); line-height: .9; letter-spacing: -0.045em; }
+  .pitch p { margin-top: 28px; font-size: clamp(18px, 2vw, 22px); line-height: 1.5; max-width: 34em; color: #e3e5f2; }
+  .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px; }
+  .btn { display: inline-flex; align-items: center; justify-content: center; min-height: 52px; padding: 0 24px; border-radius: 8px; font-weight: 600; font-size: 17px; text-decoration: none; border: 2px solid transparent; }
+  .btn.primary { background: var(--amber); color: var(--deep); }
+  .btn.primary:hover { background: #fff; }
+  .btn.ghost { border-color: rgba(255,255,255,.55); color: #fff; }
+  .btn.ghost:hover { background: #fff; color: var(--deep); }
+  .btn.solid { background: var(--blue); color: #fff; }
+  .btn.solid:hover { background: var(--navy); }
+  .btn.outline { border-color: var(--ink); color: var(--ink); }
+  .btn.outline:hover { background: var(--ink); color: #fff; }
+
+  /* ---- Skill showcase ---- */
+  .skill { padding: clamp(56px, 9vw, 120px) var(--gutter) clamp(40px, 6vw, 80px); }
+  .skill-head { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 80px); align-items: end; }
+  .skill-head h2 { font-weight: 800; font-size: clamp(38px, 6vw, 84px); line-height: .95; letter-spacing: -0.035em; }
+  .skill-head p { font-size: clamp(18px, 1.7vw, 21px); color: var(--soft); max-width: var(--measure); }
+  .film { margin-top: clamp(28px, 4vw, 56px); border-radius: 14px; overflow: hidden; background: var(--deep); aspect-ratio: 16 / 9; box-shadow: 0 30px 80px -30px rgba(28,28,69,.55); }
+  .film iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .film-note { margin-top: 14px; font-size: 16px; color: var(--soft); }
+
+  .facts { margin-top: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
+  .facts h3 { font-weight: 700; font-size: 24px; letter-spacing: -0.015em; padding-top: 18px; border-top: 3px solid var(--ink); }
+  .facts ul { margin: 14px 0 0; padding: 0; list-style: none; }
+  .facts li { padding: 9px 0; border-bottom: 1px solid var(--line); color: var(--soft); }
+  .facts li strong { color: var(--ink); font-weight: 600; }
+  .get { margin-top: clamp(36px, 5vw, 64px); display: flex; flex-wrap: wrap; gap: 12px; align-items: center; }
+  .get-note { font-size: 16px; color: var(--soft); max-width: var(--measure); margin-top: 16px; }
+
+  /* ---- How a run goes: a real sequence, so it is numbered ---- */
+  .run { background: var(--navy); color: #fff; padding: clamp(56px, 8vw, 112px) var(--gutter); }
+  .run h2 { font-weight: 800; font-size: clamp(32px, 4.6vw, 60px); line-height: 1; letter-spacing: -0.03em; max-width: 16em; }
+  .run ol { list-style: none; margin: clamp(32px, 5vw, 64px) 0 0; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); counter-reset: s; }
+  .run li { counter-increment: s; }
+  .run li::before { content: counter(s); font-family: var(--display); font-weight: 800; font-size: 64px; line-height: 1; color: var(--amber); display: block; }
+  .run li h3 { font-size: 24px; font-weight: 700; margin-top: 14px; letter-spacing: -0.015em; }
+  .run li p { margin-top: 8px; color: #cfd2e6; max-width: 30em; }
+
+  /* ---- Closing note and footer ---- */
+  .note { padding: clamp(56px, 8vw, 112px) var(--gutter); display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: clamp(24px, 5vw, 80px); }
+  .note h2 { font-weight: 800; font-size: clamp(30px, 4vw, 52px); line-height: 1.02; letter-spacing: -0.03em; }
+  .note p { color: var(--soft); max-width: var(--measure); }
+  .note p + p { margin-top: 16px; }
+  footer { padding: 28px var(--gutter) 40px; border-top: 1px solid var(--line); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px; font-size: 16px; color: var(--soft); }
+  footer a { color: var(--ink); }
+
+  @media (max-width: 860px) {
+    body { font-size: 17px; }
+    .skill-head, .note { grid-template-columns: 1fr; align-items: start; }
+    .facts, .run ol { grid-template-columns: 1fr; }
+    .hero::after { background: linear-gradient(0deg, rgba(14,14,44,.96) 0%, rgba(14,14,44,.8) 45%, rgba(14,14,44,.2) 100%); }
+    .film { border-radius: 10px; }
+  }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <canvas id="fractal" aria-hidden="true"></canvas>
+  <div class="bar">
+    <a class="mark" href="/">
+      <svg aria-hidden="true" width="26" height="26" viewBox="0 0 32 32"><path d="M16 4l11 22H5z" fill="none" stroke="#ffbe5c" stroke-width="2.4" stroke-linejoin="round"/><path d="M16 15l5.5 11h-11z" fill="#ffbe5c"/></svg>
+      AI Skills That Work
+    </a>
+    <a class="gh" href="https://github.com/antoineweb/aiskillsthatwork">GitHub</a>
+  </div>
+  <div class="pitch">
+    <h1>AI skills that work.</h1>
+    <p>A skill is a small instruction file that teaches Claude one job and makes it do that job the same way every time. The ones here are free, tested on real work, and each comes with a demo you can watch before you install it.</p>
+    <div class="actions">
+      <a class="btn primary" href="#product-demo-guide">Watch the first skill</a>
+      <a class="btn ghost" href="https://github.com/antoineweb/aiskillsthatwork">Browse the repository</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="skill" id="product-demo-guide">
+    <div class="skill-head">
+      <h2>Product demo guide</h2>
+      <p>Turns a flow in your product into an animated step-by-step guide, then exports it as a video. The interface stays recognizable but is simplified and enlarged, your branding frames it, and the steps appear on the right as the cursor does the work.</p>
+    </div>
+
+    <div class="film">
+      <iframe src="https://www.youtube-nocookie.com/embed/CgK8EIVBRBY?rel=0" title="Onboarding user guide, an example of the format this skill produces" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+    </div>
+    <p class="film-note">The onboarding guide this skill was built from. Two minutes, eight steps, demo data only.</p>
+
+    <div class="facts">
+      <div>
+        <h3>You give it</h3>
+        <ul>
+          <li><strong>The flow</strong>, as screenshots or a description</li>
+          <li><strong>The exact labels</strong> on your buttons and fields</li>
+          <li><strong>Your logo and colours</strong></li>
+        </ul>
+      </div>
+      <div>
+        <h3>You get</h3>
+        <ul>
+          <li><strong>A storyboard</strong> to approve before anything is built</li>
+          <li><strong>A page that plays</strong> in any browser, with pause and scrub</li>
+          <li><strong>An MP4</strong>, every frame computed, not screen recorded</li>
+        </ul>
+      </div>
+      <div>
+        <h3>Video formats</h3>
+        <ul>
+          <li><strong>Very high</strong>, 3840 x 2160 at 60 fps</li>
+          <li><strong>High</strong>, 2560 x 1440 at 60 fps, the default</li>
+          <li><strong>Medium</strong>, 1920 x 1080 at 60 fps</li>
+          <li><strong>Low</strong>, 1280 x 720 at 30 fps</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="get">
+      <a class="btn solid" href="downloads/product-demo-guide.zip" download>Download the skill</a>
+      <a class="btn outline" href="example/">Play a live example</a>
+      <a class="btn outline" href="https://github.com/antoineweb/aiskillsthatwork/tree/main/skills/product-demo-guide">Read the source</a>
+    </div>
+    <p class="get-note">Add the zip to your Claude skills, then ask for a demo of a flow in your product. The live example is the template the skill starts from, playing in your browser.</p>
+  </section>
+
+  <section class="run" aria-labelledby="run-title">
+    <h2 id="run-title">How a run goes</h2>
+    <ol>
+      <li><h3>Describe the flow</h3><p>Say which task to teach and share the screens. The skill asks only for what is missing and never invents a label.</p></li>
+      <li><h3>Approve the storyboard</h3><p>You see every scene, its duration and the lines on screen. Change anything before a single frame exists.</p></li>
+      <li><h3>Get the page and the video</h3><p>One self-contained page to share, and an MP4 in the format you pick, checked frame by frame.</p></li>
+    </ol>
+  </section>
+
+  <section class="note" aria-labelledby="note-title">
+    <h2 id="note-title">One skill today. More when they pass real work.</h2>
+    <div>
+      <p>Nothing is published here until it has done a real job end to end. That is the whole selection rule, and it is why the list is short.</p>
+      <p>Skills are plain Markdown. They are written and tested for Claude, and any agent that reads instruction files can use them with small changes.</p>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <span>Made by Antoine Schuppisser. Free to use under the MIT licence.</span>
+  <a href="https://github.com/antoineweb/aiskillsthatwork">github.com/antoineweb/aiskillsthatwork</a>
+</footer>
+
+<script>
+/* Julia set, drawn small and scaled up. It drifts slowly; with reduced motion it stays still. */
+(() => {
+  const cv = document.getElementById('fractal'), ctx = cv.getContext('2d');
+  const W = 420, H = 260, MAX = 70;
+  cv.width = W; cv.height = H;
+  const img = ctx.createImageData(W, H), px = img.data;
+  // navy, blue, amber, white
+  const stops = [[14, 14, 44], [28, 28, 110], [0, 70, 255], [255, 190, 92], [255, 246, 228]];
+  const lut = new Uint8Array((MAX + 1) * 3);
+  for (let i = 0; i <= MAX; i++) {
+    const t = Math.pow(i / MAX, 0.55) * (stops.length - 1), k = Math.min(stops.length - 2, Math.floor(t)), f = t - k;
+    for (let c = 0; c < 3; c++) lut[i * 3 + c] = stops[k][c] + (stops[k + 1][c] - stops[k][c]) * f;
+  }
+  function draw(a) {
+    const cr = 0.7885 * Math.cos(a), ci = 0.7885 * Math.sin(a), s = 3.1 / W;
+    let p = 0;
+    for (let y = 0; y < H; y++) {
+      const y0 = (y - H / 2) * s;
+      for (let x = 0; x < W; x++) {
+        let zr = (x - W * 0.62) * s, zi = y0, n = 0;
+        while (n < MAX) { const r2 = zr * zr, i2 = zi * zi; if (r2 + i2 > 4) break; zi = 2 * zr * zi + ci; zr = r2 - i2 + cr; n++; }
+        const o = n * 3; px[p++] = lut[o]; px[p++] = lut[o + 1]; px[p++] = lut[o + 2]; px[p++] = 255;
+      }
+    }
+    ctx.putImageData(img, 0, 0);
+  }
+  const still = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  let a = 2.05, visible = true, last = 0;
+  draw(a);
+  if (still) return;
+  new IntersectionObserver(e => { visible = e[0].isIntersecting; }).observe(cv);
+  const tick = t => { if (visible && t - last > 50) { a += 0.0016; draw(a); last = t; } requestAnimationFrame(tick); };
+  requestAnimationFrame(tick);
+})();
+</script>
+</body>
+</html>
