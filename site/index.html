@@ -38,7 +38,7 @@
 
   /* ---- Hero: the fractal is the one loud thing on the page ---- */
   .hero { position: relative; background: var(--deep); color: #fff; min-height: min(92vh, 860px); display: flex; flex-direction: column; overflow: hidden; }
-  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; }
+  .hero canvas { position: absolute; inset: 0; width: 100%; height: 100%; display: block; object-fit: cover; object-position: 70% 50%; }
   .hero::after { content: ""; position: absolute; inset: 0; background: linear-gradient(90deg, rgba(14,14,44,.94) 0%, rgba(14,14,44,.78) 38%, rgba(14,14,44,.12) 72%, rgba(14,14,44,0) 100%), linear-gradient(0deg, rgba(14,14,44,.7) 0%, rgba(14,14,44,0) 40%); pointer-events: none; }
   .bar { position: relative; z-index: 2; display: flex; justify-content: space-between; align-items: center; gap: 16px; padding: 24px var(--gutter); }
   .mark { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; text-decoration: none; display: flex; align-items: center; gap: 10px; }
