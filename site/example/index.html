@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Demo Guide Example</title>
+<title>Marlo Invoice Guide</title>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 <style>
   html, body { margin: 0; height: 100%; background: #0a0a0a; overflow: hidden; font-family: Inter, Helvetica, Arial, sans-serif; -webkit-font-smoothing: antialiased; }
@@ -21,37 +21,38 @@
 <div id="fit"><div id="stage"></div></div>
 <div id="bar"><button id="play" type="button">Pause</button><input id="seek" type="range" min="0" step="0.01" value="0" aria-label="Timeline"><span id="clock"></span></div>
 <script>
-/* ============ 1. BRAND: the only block that changes per company ============ */
+/* ============ 1. BRAND ============ */
 const B = {
-  product: 'Lumen Desk',                       // product name, shown on the title card and in the app bar
-  kicker: 'Guide for new team members',        // who the guide is for
-  title: 'Create a support ticket',            // what the viewer will be able to do
-  subtitle: 'From the ticket list to a request sent, in two steps.',
-  header: 'Lumen Desk guide',                  // small uppercase label, top left of every step
-  url: 'desk.lumen.example/tickets',           // typed in the browser bar
-  accent: 'rgb(0,70,255)',                     // primary action colour of the real product
-  dark: 'rgb(28,28,69)',                       // app bar, title card and end card
-  ink: 'rgb(0,0,46)', sec: 'rgb(83,83,89)', muted: 'rgb(118,118,140)', line: 'rgb(217,221,232)', page: 'rgb(246,246,248)',
-  font: 'Inter',                               // UI font of the real product (loaded in <head>)
-  // Company logo as INLINE SVG, once for light backgrounds and once for dark ones.
-  logo: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="rgb(0,70,255)"/><circle cx="17" cy="17" r="7" fill="#fff"/></svg>`,
-  logoOnDark: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="17" r="7" fill="rgb(28,28,69)"/></svg>`,
-  links: [['Lumen Desk', 'desk.lumen.example'], ['Questions', 'Contact the support team']],
-  disclaimer: 'Demo data only. Names and requests are fictitious.',
+  product: 'Marlo',
+  kicker: 'Guide for new customers',
+  title: 'Send your first invoice',
+  subtitle: 'From sign in to paid, in six steps.',
+  header: 'Marlo guide',
+  url: 'app.marlo.example',
+  accent: 'rgb(0,122,94)', pressed: 'rgb(0,88,68)', ring: 'rgba(0,122,94,.28)',
+  dark: 'rgb(12,43,38)', head: 'rgb(22,66,58)', tint: 'rgb(234,246,241)',
+  ink: 'rgb(10,28,26)', sec: 'rgb(74,88,85)', muted: 'rgb(112,126,122)', line: 'rgb(214,224,220)', page: 'rgb(245,247,246)',
+  font: 'Inter',
+  logo: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="rgb(0,122,94)"/><path d="M9 24V11l8 9 8-9v13" fill="none" stroke="#fff" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  logoOnDark: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="9" fill="#fff"/><path d="M9 24V11l8 9 8-9v13" fill="none" stroke="rgb(12,43,38)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>`,
+  links: [['Marlo', 'app.marlo.example'], ['Help centre', 'help.marlo.example'], ['Questions', 'Chat with us from any page']],
+  disclaimer: 'Marlo is a fictional product. Demo data only.',
 };
 
-/* ============ 2. SCENES: the outline. Durations in seconds, in order ============ */
+/* ============ 2. SCENES ============ */
 const SCENES = [
-  { name: 'Intro', dur: 5 },
-  { name: 'Open', dur: 9 },
-  { name: 'Fill', dur: 13 },
-  { name: 'Outro', dur: 5 },
+  { name: 'Intro', dur: 5 }, { name: 'SignIn', dur: 8 }, { name: 'New', dur: 7 }, { name: 'Client', dur: 9 },
+  { name: 'Items', dur: 13 }, { name: 'Send', dur: 10 }, { name: 'Paid', dur: 10 }, { name: 'Outro', dur: 6 },
 ];
 
-/* ============ 3. STEPS: the right-hand panel. b = [seconds after the step starts, text] ============ */
+/* ============ 3. STEPS ============ */
 const STEPS = [
-  { cue: 'Open', end: 'Fill', title: 'Open a new ticket', b: [[0.6, 'Select New ticket'], [3.4, 'The form opens'], [5, 'Fields marked * are required']] },
-  { cue: 'Fill', end: 'Outro', title: 'Describe the request', b: [[1.2, 'A clear title the team can recognise'], [4.8, 'Set the priority'], [8.6, 'Save sends it to the support team'], [10.2, 'It appears in the list as Open']] },
+  { cue: 'SignIn', end: 'New', title: 'Sign in', b: [[0.4, 'Open app.marlo.example'], [2.8, 'Enter your work email'], [5.6, 'Select Continue']] },
+  { cue: 'New', end: 'Client', title: 'Start a new invoice', b: [[0.6, 'You land on Invoices'], [2.5, 'Select New invoice'], [4, 'A draft opens, already numbered']] },
+  { cue: 'Client', end: 'Items', title: 'Choose the client', b: [[1.5, 'Start typing the client name'], [4.4, 'Pick it from the list'], [6, 'The due date follows their payment terms']] },
+  { cue: 'Items', end: 'Send', title: 'Add what you sold', b: [[1, 'Describe the work'], [3, 'Quantity and rate: Marlo does the maths'], [6.6, 'Add a line for each item'], [10.4, 'VAT and total update on their own']] },
+  { cue: 'Send', end: 'Paid', title: 'Review and send', b: [[1.9, 'Select Send invoice'], [2.6, 'Check who receives it'], [4.5, 'Your client gets an email with a pay link']] },
+  { cue: 'Paid', end: 'Outro', title: 'Follow the payment', b: [[0.6, 'The invoice shows as Sent'], [3.5, 'Viewed: your client opened it'], [7, 'Paid: the money is on its way']] },
 ];
 
 /* ============ Engine: everything on screen is a pure function of T ============ */
@@ -73,38 +74,55 @@ const PX = 1308, PW = 540;                      // step panel
 
 /* ---- Simplified UI kit: enlarged, flat versions of the product's real components ---- */
 function field({ x, y, w, h = 48, label, req, value = '', ph = '', focus, chev, tail = '' }) {
-  const ring = focus ? `inset 0 0 0 2px ${B.accent}, 0 0 0 3px rgba(0,70,255,.28)` : `inset 0 0 0 1px ${B.muted}`;
+  const ring = focus ? `inset 0 0 0 2px ${B.accent}, 0 0 0 3px ${B.ring}` : `inset 0 0 0 1px ${B.muted}`;
   return `<div style="position:absolute;left:${x}px;top:${y - 34}px;width:${w}px">
-    <div style="font-size:19px;line-height:26px;margin-bottom:8px;color:${B.ink}">${esc(label)}${req ? '<span style="color:rgb(218,30,40)"> *</span>' : ''}</div>
+    <div style="font-size:19px;line-height:26px;margin-bottom:8px;color:${B.ink}">${esc(label)}${req ? '<span style="color:rgb(200,30,45)"> *</span>' : ''}</div>
     <div style="height:${h}px;border-radius:4px;background:#fff;box-shadow:${ring};display:flex;align-items:center;padding:0 16px;box-sizing:border-box;font-size:19px;white-space:nowrap">
       <span style="flex:1;color:${value ? B.ink : B.muted}">${value ? esc(value) : esc(ph)}${tail}</span>${chev ? `<span style="font-size:16px;color:${B.ink}">&#8964;</span>` : ''}
     </div></div>`;
 }
 function dropdown({ x, y, w, items, hi, opacity }) {
   return box(x, y, w, items.length * 44 + 8, `background:#fff;border-radius:4px;box-shadow:0 8px 24px rgba(16,24,40,.18), inset 0 0 0 1px ${B.line};padding:4px 0;opacity:${opacity};z-index:5`,
-    items.map((it, i) => `<div style="height:44px;display:flex;align-items:center;padding:0 16px;font-size:19px;background:${i === hi ? 'rgb(236,239,248)' : 'transparent'};color:${B.ink};font-weight:${i === hi ? 600 : 400}">${esc(it)}</div>`).join(''));
+    items.map((it, i) => `<div style="height:44px;display:flex;align-items:center;padding:0 16px;font-size:19px;background:${i === hi ? B.tint : 'transparent'};color:${B.ink};font-weight:${i === hi ? 600 : 400}">${esc(it)}</div>`).join(''));
 }
-const button = (x, y, w, label, primary, pressed) => box(x, y, w, 48, `border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;${primary ? `background:${pressed ? 'rgb(0,42,153)' : B.accent};color:#fff` : `background:#fff;color:${B.ink};box-shadow:inset 0 0 0 1px ${B.ink}`}`, esc(label));
+const button = (x, y, w, label, primary, pressed) => box(x, y, w, 48, `border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;${primary ? `background:${pressed ? B.pressed : B.accent};color:#fff` : `background:#fff;color:${B.ink};box-shadow:inset 0 0 0 1px ${B.ink}`}`, esc(label));
 const pill = (label, bg, fg) => `<span style="display:inline-block;padding:4px 12px;border-radius:999px;font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:${bg};color:${fg}">${esc(label)}</span>`;
 
 /* ---- The frame ---- */
-function frame() {
-  const sO = CUES.Open, sF = CUES.Fill, sE = CUES.Outro;
+const eur = n => '€' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+const cell = (x, y, w, value, ph, focus, tail = '', right) => box(x, y, w, 44, `border-radius:4px;background:#fff;box-shadow:${focus ? `inset 0 0 0 2px ${B.accent}, 0 0 0 3px ${B.ring}` : `inset 0 0 0 1px ${B.line}`};display:flex;align-items:center;justify-content:${right ? 'flex-end' : 'flex-start'};padding:0 14px;font-size:19px;white-space:nowrap;color:${value ? B.ink : B.muted}`, (value ? esc(value) : esc(ph)) + tail);
 
-  // Cursor path: [time, x, y]. It glides between points and rests when two points share a position.
-  const K = [[0, 900, 700], [sO + 1.2, 900, 700], [sO + 2.3, 1130, 312], [sO + 3.4, 1130, 312], [sO + 4.5, 700, 650],
-    [sF + 0.3, 700, 650], [sF + 1, 520, 446], [sF + 4.2, 520, 446], [sF + 4.7, 420, 566], [sF + 5.4, 420, 566], [sF + 6, 380, 706], [sF + 7, 380, 706],
-    [sF + 8.4, 990, 746], [sF + 9, 990, 746], [sF + 10, 900, 820]];
-  const clicks = [sO + 2.5, sF + 1.2, sF + 4.8, sF + 6.8, sF + 8.6];
+function frame() {
+  const sS = CUES.SignIn, sN = CUES.New, sC = CUES.Client, sI = CUES.Items, sD = CUES.Send, sP = CUES.Paid, sE = CUES.Outro;
+
+  const K = [[0, 900, 720], [sS + 1.6, 900, 720], [sS + 2.6, 662, 524], [sS + 5, 662, 524], [sS + 5.5, 662, 604], [sS + 6.6, 662, 604],
+    [sN + 1, 800, 620], [sN + 1.3, 800, 620], [sN + 2.2, 1134, 310], [sN + 3.2, 1134, 310], [sN + 4.4, 700, 600],
+    [sC + 0.6, 700, 600], [sC + 1.3, 356, 426], [sC + 2.9, 356, 426], [sC + 3.6, 300, 478], [sC + 4.9, 300, 478], [sC + 6, 788, 470], [sC + 8.4, 788, 470],
+    [sI + 0.9, 300, 574], [sI + 2.7, 300, 574], [sI + 2.95, 808, 574], [sI + 3.9, 808, 574], [sI + 4.2, 958, 574], [sI + 5.7, 958, 574],
+    [sI + 6.4, 160, 682], [sI + 6.9, 160, 682], [sI + 7.15, 300, 630], [sI + 8.2, 300, 630], [sI + 8.5, 808, 630], [sI + 9.2, 808, 630], [sI + 9.5, 958, 630], [sI + 10.5, 958, 630], [sI + 11.6, 1040, 860],
+    [sD + 0.8, 1040, 860], [sD + 1.6, 1152, 310], [sD + 2.9, 1152, 310], [sD + 4.2, 856, 636], [sD + 5.2, 856, 636], [sD + 6.6, 930, 780]];
+  const clicks = [sS + 2.8, sS + 5.6, sN + 2.5, sC + 1.5, sC + 4.4, sI + 1, sI + 3.05, sI + 4.3, sI + 6.6, sI + 7.2, sI + 8.6, sI + 9.6, sD + 1.9, sD + 4.5];
   let cx = K[K.length - 1][1], cy = K[K.length - 1][2];
   for (let i = 0; i < K.length - 1; i++) if (T < K[i + 1][0]) { const p = EASE.move(clamp((T - K[i][0]) / Math.max(.001, K[i + 1][0] - K[i][0]), 0, 1)); cx = K[i][1] + (K[i + 1][1] - K[i][1]) * p; cy = K[i][2] + (K[i + 1][2] - K[i][2]) * p; break; }
 
   // State derived from time
-  const modal = A(sO + 3, sO + 3.6) * (1 - A(sF + 9, sF + 9.6));
-  const ddOpen = on(sF + 4.85, sF + 6.85), priority = T >= sF + 6.8 ? 'High' : '';
-  const newRow = A(sF + 9.8, sF + 10.3);
-  const rows = [['T-1042', 'Badge reader offline, entrance B', 'Open'], ['T-1038', 'New laptop for a starter', 'In progress'], ['T-1031', 'Wi-Fi drops on floor 3', 'In progress']];
+  const signIn = 1 - A(sS + 6.2, sS + 6.8), app = A(sS + 6.2, sS + 6.8);
+  const editor = A(sN + 3, sN + 3.6) * (1 - A(sD + 5.2, sD + 5.8));
+  const client = T < sC + 4.4 ? typed('Hel', sC + 1.9, 0.6) : 'Helios Studio';
+  const ddOpen = on(sC + 2.2, sC + 4.45);
+  const due = T >= sC + 6 ? '21 Dec 2026, 30 days' : '';
+  const d1 = typed('Brand workshop', sI + 1.2, 1.4), q1 = T >= sI + 3.3 ? '2' : '', r1 = typed('900', sI + 4.5, 0.6);
+  const row2 = A(sI + 6.6, sI + 7);
+  const d2 = typed('Travel', sI + 7.4, 0.6), q2 = T >= sI + 8.8 ? '1' : '', r2 = typed('240', sI + 9.8, 0.5);
+  const a1 = q1 && r1.length === 3 ? 1800 : 0, a2 = q2 && r2.length === 3 ? 240 : 0;
+  const sub = a1 + a2, vat = sub * 0.21, total = sub + vat;
+  const modal = A(sD + 2.2, sD + 2.7) * (1 - A(sD + 4.6, sD + 5));
+  const newRow = A(sD + 5.8, sD + 6.4);
+  const status = T < sP + 3.5 ? 'Sent' : T < sP + 7 ? 'Viewed' : 'Paid';
+  const statusPop = 1 + 0.12 * (1 - A(sP + 3.5, sP + 3.9)) * (T >= sP + 3.5 ? 1 : 0) + 0.12 * (1 - A(sP + 7, sP + 7.4)) * (T >= sP + 7 ? 1 : 0);
   const stepIdx = STEPS.reduce((n, s, i) => T >= CUES[s.cue] ? i : n, -1);
+  const PILL = { Draft: ['rgb(232,236,235)', 'rgb(60,72,70)'], Sent: ['rgb(228,238,255)', 'rgb(24,72,160)'], Viewed: ['rgb(255,241,208)', 'rgb(112,70,0)'], Paid: ['rgb(222,245,234)', 'rgb(10,92,58)'] };
+  const tag = s => pill(s, PILL[s][0], PILL[s][1]);
 
   let h = `<div style="position:absolute;inset:0;background:${B.page};color:${B.ink};font-family:${B.font}, Helvetica, Arial, sans-serif">`;
 
@@ -114,38 +132,85 @@ function frame() {
       <span style="font-size:24px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:${B.accent}">${esc(B.header)}</span></div>
     <div style="display:flex;gap:8px">${STEPS.map((s, i) => `<span style="width:48px;height:6px;border-radius:999px;background:${i <= stepIdx ? B.accent : B.line}"></span>`).join('')}</div></div>`;
 
-  // Browser frame: kept minimal on purpose (three dots and the address)
-  h += box(SX, SY, SW, SH, `background:#fff;border-radius:8px;box-shadow:0 1px 2px rgba(28,28,69,.08), inset 0 0 0 1px ${B.line};overflow:hidden`,
-    `<div style="height:52px;background:rgb(237,237,240);display:flex;align-items:center;gap:10px;padding:0 20px">
-      ${[0, 1, 2].map(() => '<span style="width:12px;height:12px;border-radius:999px;background:rgb(191,191,191)"></span>').join('')}
-      <div style="margin-left:24px;flex:1;height:32px;background:#fff;border-radius:999px;display:flex;align-items:center;padding:0 18px;font-size:18px;color:${B.sec}">${esc(typed(B.url, sO + 0.3, 1.2))}${caret(sO + 0.2, sO + 1.8)}</div></div>`);
+  // Browser frame
+  h += box(SX, SY, SW, SH, `background:#fff;border-radius:8px;box-shadow:0 1px 2px rgba(12,43,38,.08), inset 0 0 0 1px ${B.line};overflow:hidden`,
+    `<div style="height:52px;background:rgb(233,237,236);display:flex;align-items:center;gap:10px;padding:0 20px">
+      ${[0, 1, 2].map(() => '<span style="width:12px;height:12px;border-radius:999px;background:rgb(186,194,192)"></span>').join('')}
+      <div style="margin-left:24px;flex:1;height:32px;background:#fff;border-radius:999px;display:flex;align-items:center;padding:0 18px;font-size:18px;color:${B.sec}">${esc(typed(B.url, sS + 0.3, 1.1))}${caret(sS + 0.2, sS + 1.7)}</div></div>`);
 
-  // The app, simplified: app bar, one toolbar action, one table
-  h += box(SX, SY + 52, SW, 60, `background:${B.dark};color:#fff;display:flex;align-items:center;padding:0 24px;font-size:24px;font-weight:700`, esc(B.product));
-  h += button(1040, 288, 180, '+ New ticket', true, on(sO + 2.5, sO + 2.9));
-  h += box(96, 360, 1132, 44, `background:rgb(35,59,114);color:#fff;border-radius:4px 4px 0 0;display:flex;align-items:center;font-size:17px;font-weight:600`,
-    `<span style="width:160px;padding-left:20px">Ticket</span><span style="flex:1">Title</span><span style="width:200px">Status</span>`);
-  const allRows = [['T-1047', 'Projector not working in room 4B', 'Open', newRow], ...rows.map(r => [...r, 1])];
-  allRows.forEach((r, i) => {
-    const y = 404 + (i === 0 ? 0 : (i - 1) * 64 + 64 * newRow);
-    h += box(96, y, 1132, 64, `border-bottom:1px solid ${B.line};display:flex;align-items:center;font-size:19px;opacity:${r[3]};background:${i === 0 ? 'rgb(240,244,255)' : '#fff'}`,
-      `<span style="width:160px;padding-left:20px;color:${B.sec}">${r[0]}</span><span style="flex:1;font-weight:${i === 0 ? 600 : 400}">${esc(r[1])}</span><span style="width:200px">${r[2] === 'Open' ? pill('Open', 'rgb(233,246,237)', 'rgb(14,96,39)') : pill('In progress', 'rgb(240,235,255)', 'rgb(74,40,160)')}</span>`);
-  });
-
-  // The form (modal). Real labels, real order, only the fields the guide talks about.
-  if (modal > 0) {
-    h += box(SX, SY + 52, SW, SH - 52, `background:rgba(28,28,69,.5);opacity:${modal};border-radius:0 0 8px 8px`);
-    h += `<div style="opacity:${modal};transform:translateY(${(1 - modal) * 16}px);position:absolute;inset:0">`;
-    h += box(232, 300, 860, 520, `background:rgb(250,251,254);border-radius:8px;box-shadow:0 16px 48px rgba(16,24,40,.3);overflow:hidden`,
-      `<div style="height:64px;background:rgb(35,59,114);color:#fff;display:flex;align-items:center;padding:0 28px;font-size:26px;font-weight:600">Create a ticket</div>`);
-    h += field({ x: 272, y: 446, w: 780, label: 'Title', req: true, ph: 'Enter a title', value: typed('Projector not working in room 4B', sF + 1.4, 2.4), focus: on(sF + 1.2, sF + 4.6), tail: caret(sF + 1.2, sF + 4.6) });
-    h += field({ x: 272, y: 566, w: 380, label: 'Priority', req: true, ph: 'Select a priority', value: priority, chev: true, focus: ddOpen });
-    if (ddOpen) h += dropdown({ x: 272, y: 618, w: 380, items: ['Low', 'Normal', 'High'], hi: T < sF + 5.6 ? -1 : 2, opacity: win(sF + 4.85, sF + 6.85, 0.15) });
-    h += button(796, 722, 120, 'Cancel', false) + button(932, 722, 120, 'Save', true, on(sF + 8.6, sF + 9));
+  // Sign in page
+  if (signIn > 0) {
+    h += `<div style="position:absolute;inset:0;opacity:${signIn * A(sS + 1.5, sS + 2)}">`;
+    h += box(SX, SY + 52, SW, SH - 52, `background:${B.tint};border-radius:0 0 8px 8px`);
+    h += box(422, 316, 480, 348, `background:#fff;border-radius:10px;box-shadow:0 10px 30px rgba(12,43,38,.12);padding:36px 40px`,
+      `<div style="display:flex;align-items:center;gap:12px">${B.logo(36)}<span style="font-size:26px;font-weight:700">Marlo</span></div>
+       <div style="font-size:30px;font-weight:700;letter-spacing:-.01em;margin-top:22px">Sign in to your account</div>`);
+    h += field({ x: 462, y: 502, w: 400, label: 'Work email', ph: 'name@company.com', value: typed('nina@brightside.example', sS + 3, 1.7), focus: on(sS + 2.8, sS + 5.4), tail: caret(sS + 2.8, sS + 5.4) });
+    h += button(462, 580, 400, 'Continue', true, on(sS + 5.6, sS + 6));
     h += `</div>`;
   }
 
-  // Step panel: step count, title, then bullets that arrive when the action happens
+  // The app: bar, invoice list
+  if (app > 0) {
+    h += `<div style="position:absolute;inset:0;opacity:${app}">`;
+    h += box(SX, SY + 52, SW, 60, `background:${B.dark};color:#fff;display:flex;align-items:center;gap:36px;padding:0 24px;font-size:19px`,
+      `<span style="display:flex;align-items:center;gap:10px;font-size:23px;font-weight:700">${B.logoOnDark(26)}Marlo</span><span style="font-weight:600;border-bottom:3px solid rgb(120,220,185);padding:16px 0 13px">Invoices</span><span style="color:rgb(190,214,206)">Clients</span><span style="color:rgb(190,214,206)">Reports</span>`);
+    h += box(96, 284, 400, 48, 'font-size:32px;font-weight:700;letter-spacing:-.01em;display:flex;align-items:center', 'Invoices');
+    h += button(1040, 284, 188, '+ New invoice', true, on(sN + 2.5, sN + 2.9));
+    h += box(96, 356, 1132, 44, `background:${B.head};color:#fff;border-radius:4px 4px 0 0;display:flex;align-items:center;font-size:17px;font-weight:600`,
+      `<span style="width:170px;padding-left:20px">Invoice</span><span style="flex:1">Client</span><span style="width:200px;text-align:right;padding-right:48px">Amount</span><span style="width:180px">Status</span>`);
+    const rows = [['INV-0212', 'Helios Studio', eur(2468.4), status, newRow], ['INV-0211', 'Northwind Labs', eur(3200), 'Paid', 1], ['INV-0210', 'Atelier Sable', eur(1150), 'Sent', 1], ['INV-0209', 'Kite and Co', eur(980), 'Paid', 1]];
+    rows.forEach((r, i) => {
+      const y = 400 + (i === 0 ? 0 : (i - 1) * 64 + 64 * newRow);
+      h += box(96, y, 1132, 64, `border-bottom:1px solid ${B.line};display:flex;align-items:center;font-size:19px;opacity:${r[4]};background:${i === 0 ? B.tint : '#fff'}`,
+        `<span style="width:170px;padding-left:20px;color:${B.sec}">${r[0]}</span><span style="flex:1;font-weight:${i === 0 ? 600 : 400}">${esc(r[1])}</span><span style="width:200px;text-align:right;padding-right:48px;font-variant-numeric:tabular-nums">${r[2]}</span><span style="width:180px"><span style="display:inline-block;transform:scale(${i === 0 ? statusPop : 1});transform-origin:left center">${tag(r[3])}</span></span>`);
+    });
+    h += `</div>`;
+  }
+
+  // Invoice editor
+  if (editor > 0) {
+    h += `<div style="position:absolute;inset:0;opacity:${editor};transform:translateY(${(1 - editor) * 18}px)">`;
+    h += box(SX, SY + 112, SW, SH - 112, `background:rgb(250,252,251);border-radius:0 0 8px 8px;box-shadow:inset 0 0 0 1px ${B.line}`);
+    h += box(96, 284, 500, 48, 'display:flex;align-items:center;gap:16px', `<span style="font-size:32px;font-weight:700;letter-spacing:-.01em">New invoice</span>${tag('Draft')}`);
+    h += button(908, 284, 152, 'Save draft', false) + button(1076, 284, 152, 'Send invoice', true, on(sD + 1.9, sD + 2.3));
+    h += field({ x: 96, y: 402, w: 520, label: 'Client', req: true, ph: 'Search a client', value: client, chev: true, focus: on(sC + 1.5, sC + 4.45), tail: caret(sC + 1.5, sC + 4.4) });
+    h += field({ x: 648, y: 402, w: 300, label: 'Due date', ph: 'Set by client terms', value: due, focus: on(sC + 6, sC + 7.4) });
+    h += field({ x: 980, y: 402, w: 248, label: 'Invoice number', value: 'INV-0212' });
+    h += box(96, 456, 520, 26, `font-size:17px;color:${B.sec};opacity:${A(sC + 4.5, sC + 4.9)}`, 'Sent to billing@helios.example');
+    if (ddOpen) h += dropdown({ x: 96, y: 454, w: 520, items: ['Helios Studio', 'Helvetia Print'], hi: T >= sC + 3.5 ? 0 : -1, opacity: win(sC + 2.2, sC + 4.45, 0.15) });
+
+    // Line items
+    h += box(96, 504, 1132, 36, `display:flex;align-items:center;font-size:17px;font-weight:600;color:${B.sec};border-bottom:2px solid ${B.line}`,
+      `<span style="flex:1;padding-left:4px">Description</span><span style="width:120px">Qty</span><span style="width:180px">Rate</span><span style="width:180px;text-align:right;padding-right:4px">Amount</span>`);
+    const line = (y, d, q, r, a, t0, tq, tr, o) => `<div style="opacity:${o}">` +
+      cell(96, y, 636, d, 'What did you sell?', on(t0, tq - 0.3), caret(t0, tq - 0.3)) + cell(748, y, 104, q, '0', on(tq - 0.25, tr - 0.2), caret(tq - 0.25, tr - 0.2)) + cell(868, y, 164, r, '0.00', on(tr - 0.2, tr + 1.3), caret(tr - 0.2, tr + 1.3)) +
+      box(1048, y, 180, 44, `display:flex;align-items:center;justify-content:flex-end;padding-right:4px;font-size:19px;font-variant-numeric:tabular-nums;color:${a ? B.ink : B.muted};font-weight:${a ? 600 : 400}`, a ? eur(a) : eur(0)) + `</div>`;
+    h += line(552, d1, q1, r1, a1, sI + 1, sI + 3.3, sI + 4.5, 1);
+    if (row2 > 0) h += line(608, d2, q2, r2, a2, sI + 7.2, sI + 8.85, sI + 9.8, row2);
+    h += box(96, 666 , 200, 32, `display:flex;align-items:center;font-size:19px;font-weight:600;color:${B.accent};transform:translateY(${-56 * (1 - row2)}px)`, '+ Add line');
+
+    // Totals
+    const trow = (y, l, v, bold) => box(868, y, 360, 40, `display:flex;justify-content:space-between;align-items:center;font-size:${bold ? 24 : 19}px;font-weight:${bold ? 700 : 400};color:${bold ? B.ink : B.sec};font-variant-numeric:tabular-nums;${bold ? `border-top:2px solid ${B.ink};padding-top:8px;height:52px` : ''}`, `<span>${l}</span><span>${v}</span>`);
+    h += trow(730, 'Subtotal', eur(sub)) + trow(770, 'VAT 21%', eur(vat)) + trow(818, 'Total', eur(total), true);
+    h += `</div>`;
+  }
+
+  // Send confirmation
+  if (modal > 0) {
+    h += box(SX, SY + 52, SW, SH - 52, `background:rgba(12,43,38,.5);opacity:${modal};border-radius:0 0 8px 8px`);
+    h += `<div style="position:absolute;inset:0;opacity:${modal};transform:translateY(${(1 - modal) * 14}px)">`;
+    h += box(392, 420, 540, 244, `background:#fff;border-radius:10px;box-shadow:0 16px 48px rgba(12,43,38,.3);padding:30px 34px`,
+      `<div style="font-size:28px;font-weight:700;letter-spacing:-.01em">Send invoice INV-0212?</div>
+       <div style="font-size:19px;color:${B.sec};margin-top:12px;line-height:1.45">To <strong style="color:${B.ink}">billing@helios.example</strong><br>${eur(2468.4)}, due 21 Dec 2026</div>`);
+    h += button(628, 598, 120, 'Cancel', false) + button(764, 598, 136, 'Send now', true, on(sD + 4.5, sD + 4.9));
+    h += `</div>`;
+  }
+  const toast = win(sD + 4.9, sD + 8.8);
+  if (toast > 0) h += box(432, 872 + (1 - toast) * 14, 460, 56, `background:${B.dark};color:#fff;border-radius:999px;display:flex;align-items:center;justify-content:center;gap:12px;font-size:19px;font-weight:600;opacity:${toast};box-shadow:0 10px 30px rgba(12,43,38,.3);z-index:6`,
+    `<svg aria-hidden="true" width="22" height="22" viewBox="0 0 22 22"><circle cx="11" cy="11" r="11" fill="rgb(120,220,185)"/><path d="M6 11.5l3.2 3.2L16 8" fill="none" stroke="rgb(12,43,38)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>Invoice sent to Helios Studio`);
+
+  // Step panel
   STEPS.forEach((s, i) => {
     const st = CUES[s.cue], en = CUES[s.end], o = win(st, en); if (o <= 0) return;
     let last = -1; s.b.forEach((b, j) => { if (T >= st + b[0]) last = j; });
@@ -161,19 +226,19 @@ function frame() {
     ${clicks.map(c => { const p = (T - c) / 0.5; return p >= 0 && p < 1 ? `<span style="position:absolute;left:-22px;top:-22px;width:44px;height:44px;border-radius:999px;border:3px solid ${B.accent};transform:scale(${0.4 + p});opacity:${1 - p}"></span>` : ''; }).join('')}
     <svg aria-hidden="true" width="30" height="38" viewBox="0 0 30 38" style="position:absolute;left:-3px;top:-2px"><path d="M3 2 L3 30 L10 23 L15 35 L20 33 L15 21 L25 21 Z" fill="#fff" stroke="${B.ink}" stroke-width="2.2" stroke-linejoin="round"/></svg></div>`;
 
-  // Title card and end card, in the brand's dark colour
+  // Title card and end card
   const card = (opacity, z, inner) => opacity <= 0 ? '' : `<div style="position:absolute;inset:0;background:${B.dark};color:#fff;opacity:${opacity};padding:96px 120px;box-sizing:border-box;display:flex;flex-direction:column;z-index:${z}">${inner}</div>`;
-  h += card(1 - A(sO - 0.6, sO), 30, `
-    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(176,198,255);opacity:${A(0.2, 0.8)}">${esc(B.kicker)}</div>
-    <div style="font-size:112px;font-weight:700;letter-spacing:-.02em;margin-top:180px;opacity:${A(0.5, 1.2)};transform:translateY(${(1 - A(0.5, 1.2)) * 20}px)">${esc(B.product)}</div>
-    <div style="font-size:60px;font-weight:700;letter-spacing:-.015em;margin-top:12px;opacity:${A(1.1, 1.8)}">${esc(B.title)}</div>
-    <div style="font-size:32px;color:rgb(217,221,232);margin-top:20px;opacity:${A(1.6, 2.3)}">${esc(B.subtitle)}</div>
-    <div style="margin-top:auto">${B.logoOnDark(44)}</div>`);
+  h += card(1 - A(sS - 0.6, sS), 30, `
+    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(150,226,198);opacity:${A(0.2, 0.8)}">${esc(B.kicker)}</div>
+    <div style="font-size:120px;font-weight:700;letter-spacing:-.03em;margin-top:170px;opacity:${A(0.5, 1.2)};transform:translateY(${(1 - A(0.5, 1.2)) * 20}px)">${esc(B.product)}</div>
+    <div style="font-size:60px;font-weight:700;letter-spacing:-.015em;margin-top:8px;opacity:${A(1.1, 1.8)}">${esc(B.title)}</div>
+    <div style="font-size:32px;color:rgb(205,224,218);margin-top:20px;opacity:${A(1.6, 2.3)}">${esc(B.subtitle)}</div>
+    <div style="margin-top:auto">${B.logoOnDark(48)}</div>`);
   h += card(A(sE, sE + 0.6), 31, `
-    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(176,198,255)">Useful links</div>
-    <div style="font-size:60px;font-weight:700;letter-spacing:-.015em;margin-top:24px">Your request is with the team.</div>
-    <div style="display:flex;flex-direction:column;gap:22px;margin-top:64px;font-size:32px">${B.links.map((l, i) => `<div style="display:grid;grid-template-columns:260px 1fr;opacity:${A(sE + 0.6 + i * 0.3, sE + 1 + i * 0.3)}"><strong style="color:rgb(255,190,92)">${esc(l[0])}</strong><span>${esc(l[1])}</span></div>`).join('')}</div>
-    <div style="margin-top:auto;display:flex;align-items:center;gap:24px">${B.logoOnDark(44)}<span style="font-size:22px;color:rgb(160,160,185)">${esc(B.disclaimer)}</span></div>`);
+    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(150,226,198)">Useful links</div>
+    <div style="font-size:60px;font-weight:700;letter-spacing:-.015em;margin-top:24px">Your first invoice is out.</div>
+    <div style="display:flex;flex-direction:column;gap:22px;margin-top:64px;font-size:32px">${B.links.map((l, i) => `<div style="display:grid;grid-template-columns:260px 1fr;opacity:${A(sE + 0.6 + i * 0.3, sE + 1 + i * 0.3)}"><strong style="color:rgb(255,200,110)">${esc(l[0])}</strong><span>${esc(l[1])}</span></div>`).join('')}</div>
+    <div style="margin-top:auto;display:flex;align-items:center;gap:24px">${B.logoOnDark(44)}<span style="font-size:22px;color:rgb(160,188,180)">${esc(B.disclaimer)}</span></div>`);
   return h + '</div>';
 }
 

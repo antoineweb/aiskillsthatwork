@@ -111,13 +111,13 @@ const B = {
   subtitle: 'From the ticket list to a request sent, in two steps.',
   header: 'Lumen Desk guide',                  // small uppercase label, top left of every step
   url: 'desk.lumen.example/tickets',           // typed in the browser bar
-  accent: 'rgb(0,70,255)',                     // primary action colour of the real product
-  dark: 'rgb(28,28,69)',                       // app bar, title card and end card
-  ink: 'rgb(0,0,46)', sec: 'rgb(83,83,89)', muted: 'rgb(118,118,140)', line: 'rgb(217,221,232)', page: 'rgb(246,246,248)',
+  accent: 'rgb(67,56,202)',                     // primary action colour of the real product
+  dark: 'rgb(30,27,75)',                       // app bar, title card and end card
+  ink: 'rgb(15,14,40)', sec: 'rgb(83,83,89)', muted: 'rgb(118,118,140)', line: 'rgb(220,222,232)', page: 'rgb(245,245,248)',
   font: 'Inter',                               // UI font of the real product (loaded in <head>)
   // Company logo as INLINE SVG, once for light backgrounds and once for dark ones.
-  logo: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="rgb(0,70,255)"/><circle cx="17" cy="17" r="7" fill="#fff"/></svg>`,
-  logoOnDark: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="17" r="7" fill="rgb(28,28,69)"/></svg>`,
+  logo: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="rgb(67,56,202)"/><circle cx="17" cy="17" r="7" fill="#fff"/></svg>`,
+  logoOnDark: h => `<svg aria-hidden="true" height="${h}" viewBox="0 0 34 34"><rect width="34" height="34" rx="8" fill="#fff"/><circle cx="17" cy="17" r="7" fill="rgb(30,27,75)"/></svg>`,
   links: [['Lumen Desk', 'desk.lumen.example'], ['Questions', 'Contact the support team']],
   disclaimer: 'Demo data only. Names and requests are fictitious.',
 };
@@ -155,7 +155,7 @@ const PX = 1308, PW = 540;                      // step panel
 
 /* ---- Simplified UI kit: enlarged, flat versions of the product's real components ---- */
 function field({ x, y, w, h = 48, label, req, value = '', ph = '', focus, chev, tail = '' }) {
-  const ring = focus ? `inset 0 0 0 2px ${B.accent}, 0 0 0 3px rgba(0,70,255,.28)` : `inset 0 0 0 1px ${B.muted}`;
+  const ring = focus ? `inset 0 0 0 2px ${B.accent}, 0 0 0 3px rgba(67,56,202,.28)` : `inset 0 0 0 1px ${B.muted}`;
   return `<div style="position:absolute;left:${x}px;top:${y - 34}px;width:${w}px">
     <div style="font-size:19px;line-height:26px;margin-bottom:8px;color:${B.ink}">${esc(label)}${req ? '<span style="color:rgb(218,30,40)"> *</span>' : ''}</div>
     <div style="height:${h}px;border-radius:4px;background:#fff;box-shadow:${ring};display:flex;align-items:center;padding:0 16px;box-sizing:border-box;font-size:19px;white-space:nowrap">
@@ -164,9 +164,9 @@ function field({ x, y, w, h = 48, label, req, value = '', ph = '', focus, chev, 
 }
 function dropdown({ x, y, w, items, hi, opacity }) {
   return box(x, y, w, items.length * 44 + 8, `background:#fff;border-radius:4px;box-shadow:0 8px 24px rgba(16,24,40,.18), inset 0 0 0 1px ${B.line};padding:4px 0;opacity:${opacity};z-index:5`,
-    items.map((it, i) => `<div style="height:44px;display:flex;align-items:center;padding:0 16px;font-size:19px;background:${i === hi ? 'rgb(236,239,248)' : 'transparent'};color:${B.ink};font-weight:${i === hi ? 600 : 400}">${esc(it)}</div>`).join(''));
+    items.map((it, i) => `<div style="height:44px;display:flex;align-items:center;padding:0 16px;font-size:19px;background:${i === hi ? 'rgb(236,238,250)' : 'transparent'};color:${B.ink};font-weight:${i === hi ? 600 : 400}">${esc(it)}</div>`).join(''));
 }
-const button = (x, y, w, label, primary, pressed) => box(x, y, w, 48, `border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;${primary ? `background:${pressed ? 'rgb(0,42,153)' : B.accent};color:#fff` : `background:#fff;color:${B.ink};box-shadow:inset 0 0 0 1px ${B.ink}`}`, esc(label));
+const button = (x, y, w, label, primary, pressed) => box(x, y, w, 48, `border-radius:4px;display:flex;align-items:center;justify-content:center;font-size:19px;font-weight:600;${primary ? `background:${pressed ? 'rgb(49,40,160)' : B.accent};color:#fff` : `background:#fff;color:${B.ink};box-shadow:inset 0 0 0 1px ${B.ink}`}`, esc(label));
 const pill = (label, bg, fg) => `<span style="display:inline-block;padding:4px 12px;border-radius:999px;font-size:15px;font-weight:700;letter-spacing:.04em;text-transform:uppercase;background:${bg};color:${fg}">${esc(label)}</span>`;
 
 /* ---- The frame ---- */
@@ -197,29 +197,29 @@ function frame() {
     <div style="display:flex;gap:8px">${STEPS.map((s, i) => `<span style="width:48px;height:6px;border-radius:999px;background:${i <= stepIdx ? B.accent : B.line}"></span>`).join('')}</div></div>`;
 
   // Browser frame: kept minimal on purpose (three dots and the address)
-  h += box(SX, SY, SW, SH, `background:#fff;border-radius:8px;box-shadow:0 1px 2px rgba(28,28,69,.08), inset 0 0 0 1px ${B.line};overflow:hidden`,
-    `<div style="height:52px;background:rgb(237,237,240);display:flex;align-items:center;gap:10px;padding:0 20px">
+  h += box(SX, SY, SW, SH, `background:#fff;border-radius:8px;box-shadow:0 1px 2px rgba(30,27,75,.08), inset 0 0 0 1px ${B.line};overflow:hidden`,
+    `<div style="height:52px;background:rgb(235,236,240);display:flex;align-items:center;gap:10px;padding:0 20px">
       ${[0, 1, 2].map(() => '<span style="width:12px;height:12px;border-radius:999px;background:rgb(191,191,191)"></span>').join('')}
       <div style="margin-left:24px;flex:1;height:32px;background:#fff;border-radius:999px;display:flex;align-items:center;padding:0 18px;font-size:18px;color:${B.sec}">${esc(typed(B.url, sO + 0.3, 1.2))}${caret(sO + 0.2, sO + 1.8)}</div></div>`);
 
   // The app, simplified: app bar, one toolbar action, one table
   h += box(SX, SY + 52, SW, 60, `background:${B.dark};color:#fff;display:flex;align-items:center;padding:0 24px;font-size:24px;font-weight:700`, esc(B.product));
   h += button(1040, 288, 180, '+ New ticket', true, on(sO + 2.5, sO + 2.9));
-  h += box(96, 360, 1132, 44, `background:rgb(35,59,114);color:#fff;border-radius:4px 4px 0 0;display:flex;align-items:center;font-size:17px;font-weight:600`,
+  h += box(96, 360, 1132, 44, `background:rgb(49,46,129);color:#fff;border-radius:4px 4px 0 0;display:flex;align-items:center;font-size:17px;font-weight:600`,
     `<span style="width:160px;padding-left:20px">Ticket</span><span style="flex:1">Title</span><span style="width:200px">Status</span>`);
   const allRows = [['T-1047', 'Projector not working in room 4B', 'Open', newRow], ...rows.map(r => [...r, 1])];
   allRows.forEach((r, i) => {
     const y = 404 + (i === 0 ? 0 : (i - 1) * 64 + 64 * newRow);
     h += box(96, y, 1132, 64, `border-bottom:1px solid ${B.line};display:flex;align-items:center;font-size:19px;opacity:${r[3]};background:${i === 0 ? 'rgb(240,244,255)' : '#fff'}`,
-      `<span style="width:160px;padding-left:20px;color:${B.sec}">${r[0]}</span><span style="flex:1;font-weight:${i === 0 ? 600 : 400}">${esc(r[1])}</span><span style="width:200px">${r[2] === 'Open' ? pill('Open', 'rgb(233,246,237)', 'rgb(14,96,39)') : pill('In progress', 'rgb(240,235,255)', 'rgb(74,40,160)')}</span>`);
+      `<span style="width:160px;padding-left:20px;color:${B.sec}">${r[0]}</span><span style="flex:1;font-weight:${i === 0 ? 600 : 400}">${esc(r[1])}</span><span style="width:200px">${r[2] === 'Open' ? pill('Open', 'rgb(232,246,238)', 'rgb(14,96,39)') : pill('In progress', 'rgb(240,235,255)', 'rgb(74,40,160)')}</span>`);
   });
 
   // The form (modal). Real labels, real order, only the fields the guide talks about.
   if (modal > 0) {
-    h += box(SX, SY + 52, SW, SH - 52, `background:rgba(28,28,69,.5);opacity:${modal};border-radius:0 0 8px 8px`);
+    h += box(SX, SY + 52, SW, SH - 52, `background:rgba(30,27,75,.5);opacity:${modal};border-radius:0 0 8px 8px`);
     h += `<div style="opacity:${modal};transform:translateY(${(1 - modal) * 16}px);position:absolute;inset:0">`;
     h += box(232, 300, 860, 520, `background:rgb(250,251,254);border-radius:8px;box-shadow:0 16px 48px rgba(16,24,40,.3);overflow:hidden`,
-      `<div style="height:64px;background:rgb(35,59,114);color:#fff;display:flex;align-items:center;padding:0 28px;font-size:26px;font-weight:600">Create a ticket</div>`);
+      `<div style="height:64px;background:rgb(49,46,129);color:#fff;display:flex;align-items:center;padding:0 28px;font-size:26px;font-weight:600">Create a ticket</div>`);
     h += field({ x: 272, y: 446, w: 780, label: 'Title', req: true, ph: 'Enter a title', value: typed('Projector not working in room 4B', sF + 1.4, 2.4), focus: on(sF + 1.2, sF + 4.6), tail: caret(sF + 1.2, sF + 4.6) });
     h += field({ x: 272, y: 566, w: 380, label: 'Priority', req: true, ph: 'Select a priority', value: priority, chev: true, focus: ddOpen });
     if (ddOpen) h += dropdown({ x: 272, y: 618, w: 380, items: ['Low', 'Normal', 'High'], hi: T < sF + 5.6 ? -1 : 2, opacity: win(sF + 4.85, sF + 6.85, 0.15) });
@@ -246,13 +246,13 @@ function frame() {
   // Title card and end card, in the brand's dark colour
   const card = (opacity, z, inner) => opacity <= 0 ? '' : `<div style="position:absolute;inset:0;background:${B.dark};color:#fff;opacity:${opacity};padding:96px 120px;box-sizing:border-box;display:flex;flex-direction:column;z-index:${z}">${inner}</div>`;
   h += card(1 - A(sO - 0.6, sO), 30, `
-    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(176,198,255);opacity:${A(0.2, 0.8)}">${esc(B.kicker)}</div>
+    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(190,196,255);opacity:${A(0.2, 0.8)}">${esc(B.kicker)}</div>
     <div style="font-size:112px;font-weight:700;letter-spacing:-.02em;margin-top:180px;opacity:${A(0.5, 1.2)};transform:translateY(${(1 - A(0.5, 1.2)) * 20}px)">${esc(B.product)}</div>
     <div style="font-size:60px;font-weight:700;letter-spacing:-.015em;margin-top:12px;opacity:${A(1.1, 1.8)}">${esc(B.title)}</div>
-    <div style="font-size:32px;color:rgb(217,221,232);margin-top:20px;opacity:${A(1.6, 2.3)}">${esc(B.subtitle)}</div>
+    <div style="font-size:32px;color:rgb(220,222,232);margin-top:20px;opacity:${A(1.6, 2.3)}">${esc(B.subtitle)}</div>
     <div style="margin-top:auto">${B.logoOnDark(44)}</div>`);
   h += card(A(sE, sE + 0.6), 31, `
-    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(176,198,255)">Useful links</div>
+    <div style="font-size:24px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:rgb(190,196,255)">Useful links</div>
     <div style="font-size:60px;font-weight:700;letter-spacing:-.015em;margin-top:24px">Your request is with the team.</div>
     <div style="display:flex;flex-direction:column;gap:22px;margin-top:64px;font-size:32px">${B.links.map((l, i) => `<div style="display:grid;grid-template-columns:260px 1fr;opacity:${A(sE + 0.6 + i * 0.3, sE + 1 + i * 0.3)}"><strong style="color:rgb(255,190,92)">${esc(l[0])}</strong><span>${esc(l[1])}</span></div>`).join('')}</div>
     <div style="margin-top:auto;display:flex;align-items:center;gap:24px">${B.logoOnDark(44)}<span style="font-size:22px;color:rgb(160,160,185)">${esc(B.disclaimer)}</span></div>`);

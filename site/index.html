@@ -8,21 +8,21 @@
 <meta property="og:title" content="AI Skills That Work">
 <meta property="og:description" content="Free, tested skills for Claude. Each one comes with a demo you can watch before you install it.">
 <meta property="og:type" content="website">
-<meta property="og:image" content="https://i.ytimg.com/vi/CgK8EIVBRBY/hqdefault.jpg">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231c1c45'/%3E%3Cpath d='M16 6l9 18H7z' fill='none' stroke='%23ffbe5c' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M16 15l4.5 9h-9z' fill='%23ffbe5c'/%3E%3C/svg%3E">
+<meta property="og:image" content="https://aiskillsthatwork.vercel.app/media/marlo-poster.jpg">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%231e1b4b'/%3E%3Cpath d='M16 6l9 18H7z' fill='none' stroke='%23ffbe5c' stroke-width='2.4' stroke-linejoin='round'/%3E%3Cpath d='M16 15l4.5 9h-9z' fill='%23ffbe5c'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap">
 <style>
   :root {
-    --navy: #1c1c45;
+    --navy: #1e1b4b;
     --deep: #0e0e2c;
-    --blue: #0046ff;
+    --blue: #4338ca;
     --amber: #ffbe5c;
-    --paper: #f6f6f8;
-    --ink: #00002e;
+    --paper: #f5f5f8;
+    --ink: #0f0e28;
     --soft: #4c4c66;
-    --line: #d9dde8;
+    --line: #dcdee8;
     --display: "Bricolage Grotesque", "Helvetica Neue", Arial, sans-serif;
     --body: "Instrument Sans", "Helvetica Neue", Arial, sans-serif;
     --gutter: clamp(16px, 5vw, 72px);
@@ -64,8 +64,8 @@
   .skill-head { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); gap: clamp(24px, 5vw, 80px); align-items: end; }
   .skill-head h2 { font-weight: 800; font-size: clamp(38px, 6vw, 84px); line-height: .95; letter-spacing: -0.035em; }
   .skill-head p { font-size: clamp(18px, 1.7vw, 21px); color: var(--soft); max-width: var(--measure); }
-  .film { margin-top: clamp(28px, 4vw, 56px); border-radius: 14px; overflow: hidden; background: var(--deep); aspect-ratio: 16 / 9; box-shadow: 0 30px 80px -30px rgba(28,28,69,.55); }
-  .film iframe { width: 100%; height: 100%; border: 0; display: block; }
+  .film { margin-top: clamp(28px, 4vw, 56px); border-radius: 14px; overflow: hidden; background: var(--deep); aspect-ratio: 16 / 9; box-shadow: 0 30px 80px -30px rgba(30,27,75,.55); }
+  .film video { width: 100%; height: 100%; display: block; background: var(--deep); }
   .film-note { margin-top: 14px; font-size: 16px; color: var(--soft); }
 
   .facts { margin-top: clamp(40px, 6vw, 80px); display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(24px, 4vw, 56px); }
@@ -132,9 +132,11 @@
     </div>
 
     <div class="film">
-      <iframe src="https://www.youtube-nocookie.com/embed/CgK8EIVBRBY?rel=0" title="Onboarding user guide, an example of the format this skill produces" loading="lazy" allow="accelerometer; encrypted-media; gyroscope; picture-in-picture; fullscreen" allowfullscreen></iframe>
+      <video controls playsinline preload="none" poster="media/marlo-poster.jpg" aria-label="Demo guide for Marlo, a fictional invoicing app: send your first invoice in six steps">
+        <source src="media/marlo-demo-guide.mp4" type="video/mp4">
+      </video>
     </div>
-    <p class="film-note">The onboarding guide this skill was built from. Two minutes, eight steps, demo data only.</p>
+    <p class="film-note">Made and exported with this skill, for Marlo, a fictional invoicing app. 68 seconds, six steps, demo data only.</p>
 
     <div class="facts">
       <div>
@@ -169,7 +171,7 @@
       <a class="btn outline" href="example/">Play a live example</a>
       <a class="btn outline" href="https://github.com/antoineweb/aiskillsthatwork/tree/main/skills/product-demo-guide">Read the source</a>
     </div>
-    <p class="get-note">Add the zip to your Claude skills, then ask for a demo of a flow in your product. The live example is the template the skill starts from, playing in your browser.</p>
+    <p class="get-note">Add the zip to your Claude skills, then ask for a demo of a flow in your product. The live example is the same guide, playing in your browser instead of as a video.</p>
   </section>
 
   <section class="run" aria-labelledby="run-title">
@@ -203,7 +205,7 @@
   cv.width = W; cv.height = H;
   const img = ctx.createImageData(W, H), px = img.data;
   // navy, blue, amber, white
-  const stops = [[14, 14, 44], [28, 28, 110], [0, 70, 255], [255, 190, 92], [255, 246, 228]];
+  const stops = [[14, 14, 44], [34, 30, 112], [70, 72, 240], [255, 190, 92], [255, 246, 228]];
   const lut = new Uint8Array((MAX + 1) * 3);
   for (let i = 0; i <= MAX; i++) {
     const t = Math.pow(i / MAX, 0.55) * (stops.length - 1), k = Math.min(stops.length - 2, Math.floor(t)), f = t - k;
