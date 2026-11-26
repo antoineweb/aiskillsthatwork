@@ -9,6 +9,7 @@ A skill is a small instruction file that teaches an AI agent one job and makes i
 | Skill | What it does | Demo |
 |---|---|---|
 | [product-demo-guide](skills/product-demo-guide) | Turns a flow in your product into an animated step-by-step guide (simplified but recognizable UI, your branding, steps and milestones on the right), then exports it to MP4. | [Watch on the site](https://aiskillsthatwork.vercel.app/#product-demo-guide) |
+| [voice-to-video](skills/voice-to-video) | Turns a raw voice recording into a finished, captioned video scheduled to your channel: silence-cut, local transcription, render, frame QA, and a review gate before anything goes live. | [How it runs](https://aiskillsthatwork.vercel.app/#voice-to-video) |
 
 ## Install
 
